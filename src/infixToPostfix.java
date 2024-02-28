@@ -5,7 +5,7 @@ Infix expression: The expression of the form a op b. When an operator is in-betw
 operands.
 Postfix expression: The expression of the form a b op. When an operator is followed for every pair of
 operands.
-Note: The order of precedence is: ^ greater than * equals to / greater than + equals to -. Ignore the right
+Note: The order of pre is: ^ greater than * equals to / greater than + equals to -. Ignore the right
 associativity of ^.
 Hint:
 o If the scanned character is a ( , push it to the stack.
@@ -36,7 +36,7 @@ public class infixToPostfix {
                 }
                 stack.pop(); // Discard '('
             } else {
-                while (!stack.isEmpty() && precedence(c) <= precedence(stack.peek())) {
+                while (!stack.isEmpty() && pre(c) <= pre(stack.peek())) {
                     postfix.append(stack.pop());
                 }
                 stack.push(c);
@@ -50,7 +50,7 @@ public class infixToPostfix {
         return postfix.toString();
     }
 
-    private static int precedence(char operator) {
+    private static int pre(char operator) {
         switch (operator) {
             case '^':
                 return 3;
